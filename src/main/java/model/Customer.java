@@ -1,4 +1,4 @@
-package application.model;
+package model;
 
 public class Customer {
 
