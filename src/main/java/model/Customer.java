@@ -5,7 +5,18 @@ public class Customer {
     private int id;
     private String name;
     private String city;
+    private String street;
     private String zipCode;
+
+    public Customer() {}
+
+    public Customer(int id, String name, String city, String street, String zipCode) {
+        this.id = id;
+        this.name = name;
+        this.city = city;
+        this.street = street;
+        this.zipCode = zipCode;
+    }
 
     public int getId() {
         return id;
@@ -29,6 +40,14 @@ public class Customer {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getZipCode() {
