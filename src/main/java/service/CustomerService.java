@@ -23,14 +23,10 @@ public class CustomerService {
     }
 
 
-    @RequestMapping(value = "/customers/", method = RequestMethod.GET)
+    @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    @RequestMapping(value = "/customers/import", method = RequestMethod.GET)
-    public void importCustomers() {
         if (customers.isEmpty()) fillCustomersList();
+        return customers;
     }
 
     @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
@@ -38,10 +34,10 @@ public class CustomerService {
         return getCustomerById(id);
     }
 
-   // @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
-   // public void handleDelete(@PathVariable int id) {
-   //     deleteCustomer(id);
-   // }
+    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
+    public void handleDelete(@PathVariable int id) {
+        deleteCustomer(id);
+    }
 
     private void deleteCustomer(int id) {
         for (Customer c : customers) {
