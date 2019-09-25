@@ -2,7 +2,6 @@ package model;
 
 public class Customer {
 
-    private int id;
     private String name;
     private String city;
     private String street;
@@ -10,22 +9,12 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(int id, String name, String city, String street, String zipCode) {
-        this.id = id;
+    public Customer(String name, String city, String street, String zipCode) {
         this.name = name;
         this.city = city;
         this.street = street;
         this.zipCode = zipCode;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
