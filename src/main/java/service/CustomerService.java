@@ -11,11 +11,11 @@ import java.util.Map;
 @RestController
 public class CustomerService {
 
-    private List<Customer> customers = new ArrayList<>();
     private static Map<Integer, Customer> customersMap = new HashMap<>();
     private static Integer id = 0;
 
     private void fillCustomersList() {
+        List<Customer> customers = new ArrayList<>();
         Customer customer1 = new Customer("Jon Doe", "Nowhere", "Zero Ave. 1/1", "00-000");
         Customer customer2 = new Customer("Jane Doe", "Somewhere", "One Ave. 1/2", "00-001");
         Customer customer3 = new Customer("Tommy Vercetti", "Vice City", "Vercetti Estate 1, Starfish Island", "66-966");
@@ -32,19 +32,18 @@ public class CustomerService {
     }
 
 
-    @RequestMapping(value = "/customers", method = RequestMethod.GET)
+    @GetMapping(value = "/customers")
     public Map<Integer, Customer> getCustomers() {
         if (customersMap.isEmpty()) fillCustomersList();
         return customersMap;
     }
 
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/customers/{id}")
     public Customer handleGet(@PathVariable int id) {
         return getCustomerById(id);
     }
 
-    //TODO: Implement correct response code
-    @RequestMapping(value = "/customers/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/customers/{id}")
     public void handleDelete(@PathVariable int id) {
         deleteCustomer(id);
     }
@@ -54,7 +53,7 @@ public class CustomerService {
     }
 
     //TODO: Implement posting new customer
-    @RequestMapping(value = "/customers", method = RequestMethod.POST)
+    @PostMapping(value = "/customers")
     public void createCustomer(@RequestParam("name") String name,
                                @RequestParam("city") String city,
                                @RequestParam("street") String street,
@@ -68,7 +67,7 @@ public class CustomerService {
     }
 
     private void addCustomer(Customer c) {
-        customers.add(c);
+        customersMap.put(id+1, c);
     }
 
     private Customer getCustomerById(int id) {
