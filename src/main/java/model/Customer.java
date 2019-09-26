@@ -7,7 +7,8 @@ public class Customer {
     private String street;
     private String zipCode;
 
-    public Customer() {}
+    public Customer() {
+    }
 
     public Customer(String name, String city, String street, String zipCode) {
         this.name = name;
@@ -15,6 +16,7 @@ public class Customer {
         this.street = street;
         this.zipCode = zipCode;
     }
+
     public String getName() {
         return name;
     }

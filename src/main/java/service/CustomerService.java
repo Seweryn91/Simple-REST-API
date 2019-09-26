@@ -69,7 +69,9 @@ public class CustomerService {
     //    return new ResponseEntity<>(customer, HttpStatus.OK);
     //}
 
-    /**This method uses standard HTTP POST method parameters */
+    /**
+     * This method uses standard HTTP POST method parameters
+     */
     @PostMapping(value = "/customers")
     public ResponseEntity<Customer> handlePostHTTP(@RequestParam("name") String name, @RequestParam("city") String city,
                                                    @RequestParam("street") String street, @RequestParam("zipcode") String zipcode) {
@@ -83,7 +85,7 @@ public class CustomerService {
     }
 
     private void addCustomer(Customer c) {
-        customersMap.put(id+1, c);
+        customersMap.put(id + 1, c);
     }
 
     private Customer getCustomerById(int id) {
