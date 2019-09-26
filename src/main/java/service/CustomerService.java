@@ -1,6 +1,8 @@
 package service;
 
 import model.Customer;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -52,18 +54,10 @@ public class CustomerService {
         customersMap.remove(id);
     }
 
-    //TODO: Implement posting new customer
     @PostMapping(value = "/customers")
-    public void createCustomer(@RequestParam("name") String name,
-                               @RequestParam("city") String city,
-                               @RequestParam("street") String street,
-                               @RequestParam("zipCode") String zipCode) {
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setCity(city);
-        customer.setStreet(street);
-        customer.setZipCode(zipCode);
+    public ResponseEntity<Customer> handlePost(@RequestBody Customer customer) {
         addCustomer(customer);
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     private void addCustomer(Customer c) {
