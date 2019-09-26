@@ -74,7 +74,7 @@ public class CustomerService {
      */
     @PostMapping(value = "/customers")
     public ResponseEntity<Customer> handlePostHTTP(@RequestParam("name") String name, @RequestParam("city") String city,
-                                                   @RequestParam("street") String street, @RequestParam("zipcode") String zipcode) {
+                                                   @RequestParam("street") String street, @RequestParam("zipCode") String zipcode) {
         Customer customer = new Customer();
         customer.setName(name);
         customer.setCity(city);
@@ -85,7 +85,8 @@ public class CustomerService {
     }
 
     private void addCustomer(Customer c) {
-        customersMap.put(id + 1, c);
+        customersMap.put(id, c);
+        id++;
     }
 
     private Customer getCustomerById(int id) {
