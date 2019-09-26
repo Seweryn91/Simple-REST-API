@@ -45,19 +45,41 @@ public class CustomerService {
         return getCustomerById(id);
     }
 
+
     @DeleteMapping(value = "/customers/{id}")
-    public void handleDelete(@PathVariable int id) {
-        deleteCustomer(id);
+    public ResponseEntity handleDelete(@PathVariable int id) {
+        if (deleteCustomer(id)) {
+            return new ResponseEntity<>("Customer with ID " + id + " was removed.", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to remove customer with ID " + id, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    private void deleteCustomer(int id) {
+    private boolean deleteCustomer(int id) {
+        int prevSize = customersMap.size();
         customersMap.remove(id);
+        int currentSize = customersMap.size();
+        return currentSize < prevSize;
     }
 
+    /**This method can be used instead of handlePostHTTP to accept JSON data as input */
+    //@PostMapping(value = "/customers")
+    //public ResponseEntity<Customer> handlePostJSON(@RequestBody Customer customer) {
+    //    addCustomer(customer);
+    //    return new ResponseEntity<>(customer, HttpStatus.OK);
+    //}
+
+    /**This method uses standard HTTP POST method parameters */
     @PostMapping(value = "/customers")
-    public ResponseEntity<Customer> handlePost(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> handlePostHTTP(@RequestParam("name") String name, @RequestParam("city") String city,
+                                                   @RequestParam("street") String street, @RequestParam("zipcode") String zipcode) {
+        Customer customer = new Customer();
+        customer.setName(name);
+        customer.setCity(city);
+        customer.setStreet(street);
+        customer.setZipCode(zipcode);
         addCustomer(customer);
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return new ResponseEntity<>(customer, HttpStatus.CREATED);
     }
 
     private void addCustomer(Customer c) {
